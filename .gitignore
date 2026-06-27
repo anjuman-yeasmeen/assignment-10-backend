@@ -1,0 +1,7 @@
+node_modules/*
+.env
+.env.local
+.DS_Store
+
+# keep the template committed
+!.env.example
