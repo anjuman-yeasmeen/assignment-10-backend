@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const { connectDB } = require("./config/db");
@@ -13,25 +12,20 @@ const reviewsRoutes = require("./routes/reviews.routes");
 const paymentsRoutes = require("./routes/payments.routes");
 const prescriptionsRoutes = require("./routes/prescriptions.routes");
 const statsRoutes = require("./routes/stats.routes");
+const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Allow the Next.js client to send credentials (the JWT cookie).
-const allowedOrigins = (process.env.CLIENT_ORIGINS ||
-  "http://localhost:3000")
+const allowedOrigins = (process.env.CLIENT_ORIGINS || "http://localhost:3000")
   .split(",")
   .map((s) => s.trim());
 
 // In development, reflect any origin so LAN devices (phones, tablets) can reach
 // the API. In production, restrict to the configured allowlist.
 const isDev = process.env.NODE_ENV !== "production";
-app.use(
-  cors({
-    origin: isDev ? true : allowedOrigins,
-    credentials: true,
-  })
-);
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
