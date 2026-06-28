@@ -27,9 +27,7 @@ const allowedOrigins = (process.env.CLIENT_ORIGINS || "http://localhost:3000")
 
 app.use(
   cors({
-    origin: (origin, callback) => {
-      callback(null, true);
-    },
+    origin: true, // incoming request-এর origin echo করে দেয়, '*' নয়
     credentials: true,
   }),
 );
